@@ -1,0 +1,16 @@
+﻿@model VimeoApi.Web.Models.UploadInfoModel
+<div class="info">
+    <h3>Your Quota Info:</h3>
+    <span>
+        @Html.LabelFor(m => m.FreeSpace) : @Model.FreeSpace bytes
+    </span>
+    <span>
+        @Html.LabelFor(m => m.MaxSpace) : @Model.MaxSpace bytes
+    </span>
+    <span>
+        @Html.LabelFor(m => m.CanUploadHD) : @Model.CanUploadHD
+    </span>
+    <span>
+        @Html.LabelFor(m => m.CanUploadSD) : @Model.CanUploadSD
+    </span>
+</div>

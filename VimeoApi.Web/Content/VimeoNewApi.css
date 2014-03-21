@@ -1,0 +1,21 @@
+﻿.info {
+    background: #E6EAEB;
+    color: #678;
+    border: solid 1px #9DBCC5;
+    padding: 20px;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+    .info h3 {
+        margin: 0 0 5px 0;
+        color: #475D74;
+    }
+
+    .info span {
+        display: block;
+    }
+
+    .info label {
+        display: inline-block;
+    }

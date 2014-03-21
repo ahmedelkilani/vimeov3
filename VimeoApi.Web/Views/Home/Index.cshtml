@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Read Me";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+            </hgroup>
+        </div>
+    </section>
+}
+
+<h1>VimeoApi .NET Library</h1>
+<hr />
+Full .NET wrapper for the Vimeo New Api https://developer.vimeo.com/api
+
+<h1>Current Version and Status</h1>
+<hr />
+Current version is 0.1. Status is "beta".
+
+<h1>Unit Tests</h1>
+<hr />
+Using VimeoApi.Tests is simple. Just follow these steps:
+<ul>
+    <li>If you have not got a Vimeo app yet, register your app (<a href="https://developer.vimeo.com/apps">https://developer.vimeo.com/apps</a>)</li>
+    <li>Setup required config in App.config and in Web.config</li>
+    <li>Select the Authentication Method for your Api:
+    <pre>
+    [TestInitialize]
+    public void Init()
+    {
+        _httpSimulator = AppStart.SetDependencyResolver();
+        _videosApi = AppStart.InitVimeoClient<AuthenticatedViaRedirectVimeoClient>().Videos();
+    }
+    </pre>
+    </li>
+    <li>If you want to use AuthenticatedViaRedirectVimeoClient, you have to generate your own Access token:
+        <ul>
+            <li>Run VimeoApi.Web and navigate to /Auth/Display</li>
+            <li>Once you are redirected to vimeo, Login with your vimeo account and grant the required permissions.</li>
+            <li>You will be redirected back to /Auth/Display. Now copy your Access token</li>
+            <li>On the VimeoApi.Tests.Setup.AppStart.InitVimeoClient method update the Access token with your own.</li>
+        </ul>
+    </li>
+</ul>
+
+<h1>Dependencies</h1>
+<hr />
+<ul>
+    <li>OAuth2 (<a href="https://github.com/titarenko/OAuth2">https://github.com/titarenko/OAuth2</a>)</li>
+    <li>RestSharp (<a href="http://restsharp.org/">http://restsharp.org/</a>)</li>
+    <li>Newtonsoft.Json (<a href="http://json.codeplex.com/">http://json.codeplex.com/</a>)</li>
+    <li>Simple Ajax Uploader (<a href="https://github.com/LPology/Simple-Ajax-Uploader">https://github.com/LPology/Simple-Ajax-Uploader</a>)</li>
+</ul>
+
+<h1>Features</h1>
+<hr />
+<ul>
+    <li>Authentication Methods:
+        <ul>
+            <li>Unauthenticated Requests</li>
+            <li>Authenticated Requests (Pre-grenerated Access Token)</li>
+            <li>Authenticated Via Redirect Requests</li>
+        </ul>
+    </li>
+    <li>Endpoints:
+        <ul>
+            <li>Users</li>
+            <li>Videos</li>
+        </ul>
+    </li>
+    <li>Simple Upload</li>
+    <li>Streaming Upload</li>
+    <li>Unit Tests</li>
+</ul>
+
+<h1>License</h1>
+<hr />
+<pre>
+The MIT License
+
+Copyright (c) 2010-2014 Google, Inc. <a href="http://angularjs.org">http://angularjs.org</a>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+

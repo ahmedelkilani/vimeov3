@@ -1,0 +1,198 @@
+﻿@model VimeoApi.Web.Models.UploadInfoModel
+@{
+    ViewBag.Title = "Resumable HTTP PUT (Streaming) uploading";
+}
+
+<h2>Resumable HTTP PUT (Streaming) uploading</h2>
+
+@Html.Partial("_BeforeVideoUploadMessage")
+@Html.Partial("_QuotaInfo")
+
+<div>
+    <div id="errormsg" class="message-error">
+    </div>
+    <div id="successmsg" class="message-success">
+    </div>
+    <label><b>select a video file:</b></label>
+    <input id="upload_button" type="button" value="choose a file" data-url="@Model.UploadLinkSecure" data-completeurl="@Model.CompleteUri" />
+    <div id="upload-progress" class="upload-progress">
+        <div class="prog">
+            <div>
+                <span class="file-name"></span>( <span class="size"></span>)
+            </div>
+            <div class="bar-outer">
+                <div class="bar">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .upload-progress {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: none;
+    }
+
+        .upload-progress .bar-outer {
+            width: 50%;
+            background: #E7E7E7;
+            border: solid 1px #B4B4B4;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            margin: 3px 0;
+        }
+
+        .upload-progress .bar {
+            width: 0;
+            background: #BDC7BD;
+        }
+</style>
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/SimpleAjaxUploader.min.js")
+    <script type="text/javascript">
+        $(function () {
+
+            //Using SimpleAjaxUploader
+
+            var upload_button = $('#upload_button');
+            var url = upload_button.data('url');
+            var complete_url = upload_button.data('completeurl');
+            var wrap = $('#upload-progress'),
+                successmsg = $('#successmsg'),
+                errBox = $('#errormsg');
+
+            var uploader = new ss.SimpleUpload({
+                button: upload_button[0], // HTML element used as upload button
+                url: url, // URL of server-side upload handler
+                name: 'file_data', // Parameter name of the uploaded file
+                method: 'PUT',
+                cors: true,
+                debug: true,
+                onSubmit: function (filename, ext) {
+                    var prog = wrap.find('.prog'),
+                        outer = wrap.find('.bar-outer'),
+                        bar = wrap.find('.bar'),
+                        size = wrap.find('.size'),
+                        file_name = wrap.find('.file-name');
+
+                    file_name.html(safe_tags(filename));
+
+                    this.setProgressBar(bar);
+                    //this.setProgressContainer(prog);
+                    this.setPctBox(size);
+
+                    errBox.html('');
+                    upload_button.val('choose another file');
+                },
+                startXHR: function () {
+                    wrap.show();
+
+                    // Dynamically add a "Cancel" button to be displayed when upload begins
+                    // By doing it here ensures that it will only be added in browses which 
+                    // support cancelling uploads
+                    var abort = $(document.createElement('button'));
+
+                    wrap.append(abort);
+                    abort.addClass('btn btn-sm btn-info');
+                    abort.html('cancel');
+
+                    // Adds click event listener that will cancel the upload
+                    // The second argument is whether the button should be removed after the upload
+                    // true = yes, remove abort button after upload
+                    // false/default = do not remove
+                    this.setAbortBtn(abort[0], true);
+                },
+                onAbort: function () {
+                    wrap.hide();
+                },
+                onComplete: function (filename, response, uploadBtn, status) {
+                    wrap.hide();
+                    if (status != 200) {
+                        errBox.html('Unable to upload file');
+                        return;
+                    } else {
+                        $.when(successmsg.html("Verifying upload...")).
+                        pipe(verify).
+                        pipe(validate).
+                        pipe(function () { successmsg.html("Completing upload...") }).
+                        pipe(complete).
+                        pipe(getClipId).
+                        done(function (clipId) {
+                            successmsg.html(filename + ' has been uploaded successfully. [Clip Id: ' + clipId + ']');
+                        });
+                    }
+                }
+
+            });
+
+            var safe_tags = function (str) {
+                return String(str)
+                         .replace(/&/g, '&amp;')
+                         .replace(/"/g, '&quot;')
+                         .replace(/'/g, '&#39;')
+                         .replace(/</g, '&lt;')
+                         .replace(/>/g, '&gt;');
+            };
+
+            var verify = function () {
+                try {
+
+                    return $.ajax({
+                        url: '/Upload/VerifyUpload',
+                        method: 'GET',
+                        data: {
+                            uri: url
+                        }
+                    });
+                }
+                catch (e) {
+                    console.log('Error: ' + e.message);
+                }
+            };
+
+            var validate = function (data) {
+                var result = $.Deferred();
+                if (data > 0) {
+                    result.resolve();;
+                }
+                else {
+                    result.reject();
+                }
+                return result;
+            };
+
+            var complete = function () {
+                try {
+
+                    return $.ajax({
+                        url: '/Upload/CompleteUpload',
+                        method: 'GET',
+                        data: {
+                            uri: complete_url
+                        }
+                    });
+                }
+                catch (e) {
+                    console.log('Error: ' + e.message);
+                }
+
+            };
+
+            var getClipId = function (data) {
+                var result = $.Deferred();
+                if (data != "") {
+                    result.resolve(data);
+                }
+                else {
+                    result.reject();
+                }
+                return result;
+            };
+
+        });
+    </script>
+}

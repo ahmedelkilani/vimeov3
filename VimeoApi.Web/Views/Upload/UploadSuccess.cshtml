@@ -1,0 +1,9 @@
+﻿@model VimeoApi.Web.Models.UploadSuccessModel
+@{
+    ViewBag.Title = "Upload Succeeded";
+}
+
+<h2>Your video has been sent to Vimeo</h2>
+<p>
+    View the video on Vimeo: <a target="_blank" href="@Model.VideoUrl">@Model.VideoUrl</a>
+</p>

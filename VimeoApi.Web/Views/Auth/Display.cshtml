@@ -1,0 +1,18 @@
+﻿@model VimeoApi.Web.Models.AuthDisplayModel
+@{
+    ViewBag.Title = "Display Vimeo Access Token";
+}
+
+<h2>Display Your Vimeo Access Token</h2>
+<p>
+    @Html.LabelFor(m => m.AccessToken)
+    @Model.AccessToken
+</p>
+<p>
+    @Html.LabelFor(m => m.TokenType)
+    @Model.TokenType
+</p>
+<p>
+    @Html.LabelFor(m => m.Scope)
+    @Model.Scope
+</p>

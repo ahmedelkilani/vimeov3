@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Upload Video to Vimeo";
+}
+
+<h2>Select the upload type:</h2>
+
+<ul>
+    <li>
+        @Html.ActionLink("Simple HTTP POST uploading", "SimpleUpload")
+    </li>
+    <li>
+        @Html.ActionLink("Resumable HTTP PUT (Streaming) uploading", "StreamingUpload")
+    </li>
+</ul>

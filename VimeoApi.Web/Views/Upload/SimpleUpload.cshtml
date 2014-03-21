@@ -1,0 +1,18 @@
+﻿@model VimeoApi.Web.Models.UploadInfoModel
+@{
+    ViewBag.Title = "Simple HTTP POST uploading";
+}
+
+<h2>Simple HTTP POST uploading</h2>
+
+<form method="POST" enctype="multipart/form-data" action="@Model.UploadLinkSecure">
+    @Html.Partial("_BeforeVideoUploadMessage")
+    @Html.Partial("_QuotaInfo")
+    <p>
+        <label><b>select a video file:</b></label>
+        <input type="file" name="file_data">
+    </p>
+    <p>
+        <input type="submit" value="upload" />
+    </p>
+</form>
