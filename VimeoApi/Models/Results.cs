@@ -334,7 +334,7 @@ namespace VimeoApi.Models
         public int height { get; set; }
         public DateTime created_time { get; set; }
         public DateTime modified_time { get; set; }
-        public string content_rating { get; set; }
+        public string[] content_rating { get; set; }
         public string license { get; set; }
         public Privacy privacy { get; set; }
         public List<Picture> pictures { get; set; }
@@ -416,6 +416,22 @@ namespace VimeoApi.Models
         public Stat stats { get; set; }
         public Metadata metadata { get; set; }
         public User user { get; set; }
+    }
+
+    public enum AddingVideoToGroupResult
+    {
+        /// <summary>
+        /// The video was successfully added to the Group
+        /// </summary>
+        Added,
+        /// <summary>
+        /// The video is pending addition to the Group
+        /// </summary>
+        Pending,
+        /// <summary>
+        /// The video is already in the Group
+        /// </summary>
+        AleadyExists
     }
 
     public class Feed

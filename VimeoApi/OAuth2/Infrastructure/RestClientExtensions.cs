@@ -49,6 +49,7 @@ namespace OAuth2.Infrastructure
                 response.StatusCode != HttpStatusCode.Found &&
                 response.StatusCode != HttpStatusCode.NoContent)
             {
+                //TODO: wrap error messages
                 throw new UnexpectedResponseException(response);
             }
             return response;

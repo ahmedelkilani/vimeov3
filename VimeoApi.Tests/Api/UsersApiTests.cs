@@ -6,7 +6,7 @@ using VimeoApi.Tests.Setup;
 using VimeoApi.OAuth2.Clients.Impl;
 using VimeoApi.Models;
 
-namespace VimeoApi.Tests.Api.Users
+namespace VimeoApi.Tests.Api
 {
     [TestClass]
     public class UsersApiTests

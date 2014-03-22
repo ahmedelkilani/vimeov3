@@ -69,8 +69,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Api\Users\UsersApiTests.cs" />
-    <Compile Include="Api\Videos\VideosApiTests.cs" />
+    <Compile Include="Api\GroupsApiTests.cs" />
+    <Compile Include="Api\UsersApiTests.cs" />
+    <Compile Include="Api\VideosApiTests.cs" />
     <Compile Include="Console.cs" />
     <Compile Include="OAuth2\Clients\AuthenticatedViaRedirectVimeoClientTests.cs" />
     <Compile Include="OAuth2\Clients\AuthenticatedVimeoClientTests.cs" />

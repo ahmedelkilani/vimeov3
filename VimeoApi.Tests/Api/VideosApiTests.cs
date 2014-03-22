@@ -9,7 +9,7 @@ using VimeoApi.OAuth2.Clients.Impl;
 using VimeoApi.Models;
 using System.Linq;
 
-namespace VimeoApi.Tests.Api.Videos
+namespace VimeoApi.Tests.Api
 {
     [TestClass]
     public class VideosApiTests
