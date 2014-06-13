@@ -69,6 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Api\ChannelsApiTests.cs" />
     <Compile Include="Api\GroupsApiTests.cs" />
     <Compile Include="Api\UsersApiTests.cs" />
     <Compile Include="Api\VideosApiTests.cs" />

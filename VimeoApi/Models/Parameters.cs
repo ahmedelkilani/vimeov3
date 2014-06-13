@@ -208,4 +208,14 @@ namespace VimeoApi.Models
     }
 
     #endregion
+
+#region Channels
+
+    public enum ChannelPrivacy
+    {
+        anybody,
+        users
+    }
+
+#endregion
 }
