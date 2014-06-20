@@ -54,7 +54,7 @@ namespace VimeoApi.Tests.Setup
             {
                 // To retrieve these tokens go to /auth/display in the example website
                 client.SetAccessToken(
-                    "07a91bd15dd9a3e52c09e43a383e152d", 
+                    "d13b634b9f0c166702aa4e94100e5a36", 
                     "bearer", 
                     "private interact create edit upload delete public");
             }

@@ -80,6 +80,8 @@ namespace VimeoApi.Models
         public int moderators { get; set; }
         public int topics { get; set; }
         public int albums { get; set; }
+        public int channels { get; set; }
+        public int groups { get; set; }
     }
 
     public class Tag
@@ -136,7 +138,7 @@ namespace VimeoApi.Models
     public class Join
     {
         public bool added { get; set; }
-        public DateTime added_time { get; set; }
+        public DateTime? added_time { get; set; }
         public string status { get; set; }
         public string title { get; set; }
         public string uri { get; set; }
@@ -471,6 +473,18 @@ namespace VimeoApi.Models
     {
         public string domain { get; set; }
         public string uri { get; set; }
+    }
+
+    public class Category
+    {
+        public string uri { get; set; }
+        public string name { get; set; }
+        public string link { get; set; }
+        public bool top_level { get; set; }
+        public List<Picture> pictures { get; set; }
+        public Stat stats { get; set; }
+        public List<Category> subcategories { get; set; }
+        public Metadata metadata { get; set; }
     }
 
     #endregion
