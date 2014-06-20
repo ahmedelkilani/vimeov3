@@ -52,11 +52,11 @@ namespace VimeoApi.Tests.Setup
             var client = authorizationRoot.Clients.FirstOrDefault(p => p.Name == "VimeoClient" && p is T) as T;
             if (client is AuthenticatedViaRedirectVimeoClient)
             {
-                // To retrieve these tokens go to /auth/display in the example website
+                // To retrieve these tokens navigate to /auth/display in the example website
                 client.SetAccessToken(
-                    "d13b634b9f0c166702aa4e94100e5a36", 
-                    "bearer", 
-                    "private interact create edit upload delete public");
+                    AccessTokenConfig.Token, 
+                    AccessTokenConfig.TokenType, 
+                    AccessTokenConfig.Scop);
             }
             return client;
         }
