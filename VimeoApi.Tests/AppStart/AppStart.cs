@@ -58,6 +58,7 @@ namespace VimeoApi.Tests.Setup
                     AccessTokenConfig.TokenType, 
                     AccessTokenConfig.Scop);
             }
+
             return client;
         }
     }
